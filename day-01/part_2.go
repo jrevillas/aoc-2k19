@@ -7,17 +7,15 @@ import (
 	"strings"
 )
 
-func recursiveFuel(mass int) int {
-	var total int
-	for {
-		fuel := mass/3 - 2
-		if fuel <= 0 {
-			break
+func fuel(mass int) int {
+	f := func(mass, acc int) int {
+		x := mass/3 - 2
+		if x <= 0 {
+			return acc
 		}
-		total += fuel
-		mass = fuel
+		return f(x, acc+x)
 	}
-	return total
+	return f(mass, 0)
 }
 
 func main() {
